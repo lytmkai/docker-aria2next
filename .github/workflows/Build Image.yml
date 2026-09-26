@@ -4,10 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  # Docker Hub 镜像名称
-  DOCKER_IMAGE: superng6/aria2
   # GitHub Container Registry (ghcr.io) 镜像名称
-  GHCR_IMAGE: ghcr.io/superng6/aria2
+  GHCR_IMAGE: ghcr.io/lytmkai/aria2next
 
 jobs:
   build:
@@ -17,8 +15,6 @@ jobs:
       matrix:
         platform:
           - linux/amd64
-          - linux/arm/v7
-          - linux/arm64
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
@@ -28,13 +24,6 @@ jobs:
 
       - name: 设置 Docker Buildx
         uses: docker/setup-buildx-action@v3
-
-      # 登录 Docker Hub
-      - name: 登录到 Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # 登录 GitHub Container Registry
       - name: 登录到 GitHub Container Registry
@@ -53,7 +42,6 @@ jobs:
           file: ./Dockerfile
           platforms: ${{ matrix.platform }}
           tags: |-
-            ${{ env.DOCKER_IMAGE }}
             ${{ env.GHCR_IMAGE }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.platform }}
@@ -101,13 +89,6 @@ jobs:
       - name: 设置 Docker Buildx
         uses: docker/setup-buildx-action@v3
 
-      # 登录 Docker Hub
-      - name: 登录到 Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       # 登录 GHCR
       - name: 登录到 GitHub Container Registry
         uses: docker/login-action@v3
@@ -121,16 +102,12 @@ jobs:
         working-directory: /tmp/digests
         run: |
           docker buildx imagetools create \
-            -t "${{ env.DOCKER_IMAGE }}:${{ steps.set-version.outputs.version }}" \
-            -t "${{ env.DOCKER_IMAGE }}:latest" \
             -t "${{ env.GHCR_IMAGE }}:${{ steps.set-version.outputs.version }}" \
             -t "${{ env.GHCR_IMAGE }}:latest" \
-            $(printf '${{ env.DOCKER_IMAGE }}@sha256:%s ' *)
+            $(printf '${{ env.GHCR_IMAGE }}@sha256:%s ' *)
 
       # 检查镜像 manifest
       - name: 检查镜像
         run: |
-          docker buildx imagetools inspect ${{ env.DOCKER_IMAGE }}:${{ steps.set-version.outputs.version }}
-          docker buildx imagetools inspect ${{ env.DOCKER_IMAGE }}:latest
           docker buildx imagetools inspect ${{ env.GHCR_IMAGE }}:${{ steps.set-version.outputs.version }}
           docker buildx imagetools inspect ${{ env.GHCR_IMAGE }}:latest
