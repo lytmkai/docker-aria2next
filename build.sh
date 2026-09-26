@@ -1,6 +1,6 @@
 #!/bin/bash
 
 docker build \
-  --tag superng6/aria2:latest \
+  --tag lytmkai/aria2next:latest \
   --force-rm \
     .
