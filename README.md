@@ -8,7 +8,7 @@
 
 Docker Hub：https://hub.docker.com/r/superng6/aria2
 
-GitHub：https://www.github.com/SuperNG6/docker-aria2
+GitHub：***![](https://github.com/AnInsomniacy/aria2-next)***
 
 博客：https://sleele.com/2019/09/27/docker-aria2的最佳实践/  
 
