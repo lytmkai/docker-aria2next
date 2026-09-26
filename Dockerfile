@@ -5,8 +5,9 @@ RUN apk add --no-cache curl wget unzip \
     && ARIANG_VER=$(wget -qO- https://api.github.com/repos/mayswind/AriaNg/tags | grep 'name' | cut -d\" -f4 | head -1 ) \
     && wget -P /tmp https://github.com/mayswind/AriaNg/releases/download/${ARIANG_VER}/AriaNg-${ARIANG_VER}-AllInOne.zip \
     && unzip /tmp/AriaNg-${ARIANG_VER}-AllInOne.zip -d /tmp \
-    && ARIA2C_VER=$(wget -qO- https://api.github.com/repos/AnInsomniacy/aria2-next/tags | grep 'name' | cut -d\" -f4 | head -1 ) \
-    && wget -P /tmp -o aria2c https://github.com/AnInsomniacy/aria2-next/releases/download/${ARIA2C_VER}/aria2-next-${ARIA2C_VER}-linux-x86_64 \
+    && ARIA2C_TAG=$(wget -qO- https://api.github.com/repos/AnInsomniacy/aria2-next/tags | grep 'name' | cut -d\" -f4 | head -1 ) \
+    && ARIA2C_VER=$(echo "$ARIA2C_TAG" | sed 's/^v//') \
+    && wget -P /tmp -O aria2c https://github.com/AnInsomniacy/aria2-next/releases/download/${ARIA2C_TAG}/aria2-next-${ARIA2C_VER}-linux-x86_64 \
     && mv /tmp/aria2c /usr/local/bin
 
 
