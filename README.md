@@ -1,14 +1,16 @@
 ![](https://img.shields.io/docker/pulls/superng6/aria2) ![GitHub last commit](https://img.shields.io/github/last-commit/superng6/docker-aria2) ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/superng6/aria2/latest) ![Docker Automated build](https://img.shields.io/docker/automated/superng6/aria2) ![](https://img.shields.io/github/issues-closed/superng6/docker-aria2) ![](https://img.shields.io/github/issues/superng6/docker-aria2) ![GitHub stars](https://img.shields.io/github/stars/superng6/docker-aria2) ![GitHub forks](https://img.shields.io/github/forks/superng6/docker-aria2)
 
 
-# lytmkai: =====更改使用 aria2-next ![](https://github.com/AnInsomniacy/aria2-next)  项目 生成 a2b镜像=====
+# lytmkai: =====更改使用  [aria2-next](https://github.com/AnInsomniacy/aria2-next)  项目 生成 a2b镜像=====
+
+
 
 # Docker Aria2的最佳实践
 教程文档：https://superng6.github.io/docker-aria2
 
 Docker Hub：https://hub.docker.com/r/superng6/aria2
 
-GitHub：![](https://github.com/AnInsomniacy/aria2-next)
+GitHub：https://github.com/superng6/docker-aria2
 
 博客：https://sleele.com/2019/09/27/docker-aria2的最佳实践/  
 
